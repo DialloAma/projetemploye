@@ -10,10 +10,16 @@ class App extends Component {
     }
   }
    Addempl=(emp)=>{
-    
+    emp.id=Math.random()
      this.setState({
        employee: [...this.state.employee, emp]
      })
+
+  }
+  DeletEmp=(id)=>{
+    this.setState({
+      employee: this.state.employee.filter((emp)=> emp.id !==id)
+    })
 
   }
   
@@ -22,7 +28,7 @@ class App extends Component {
     <>
     <AddEmp newemp={this.Addempl}/>
 
-    <ListEmp EmpData={this.state.employee}/>
+    <ListEmp EmpData={this.state.employee} deletemp={this.DeletEmp}/>
     </>
     
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Table } from 'react-bootstrap'
-import {FcEditImage, MdDelete} from 'react-icons'
+import {FcEditImage, FcDeleteRow} from 'react-icons/fc'
 
 const ListEmp = (props) => {
     return (
@@ -25,6 +25,12 @@ const ListEmp = (props) => {
                         props.EmpData.map((emp) => {
                             return (
                                 <tr key={emp.id}>
+                                    <Modal show={show} onHide={handleClose} animation={false}>
+                                    <Modal.Body>
+                                        <EditUser userdata={user} updateuse={update} closemodal={handleClose} />
+                                    </Modal.Body>
+
+                                </Modal>
                                     <td>{emp.firstname}</td>
                                     <td>{emp.lastname}</td>
                                     <td>{emp.email}</td>
@@ -33,7 +39,7 @@ const ListEmp = (props) => {
                                     <td>{emp.address}</td>
                                     <td>{emp.jobrole}</td>
                                     <td>{emp.salary}</td>
-                                    <td><FcEditImage/>  <MdDelete on /></td>
+                                    <td><FcEditImage/>  <FcDeleteRow  style={{color:'red', cursor:'pointer'}} onClick={()=>props.deletemp(emp.id)} /></td>
                                 </tr>
                             )
                         })
