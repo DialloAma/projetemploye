@@ -1,5 +1,6 @@
 import { Component } from "react";
 import AddEmp from "./AddEmp";
+import ListEmp from "./ListEmp";
 
 class App extends Component {
   constructor(props){
@@ -20,6 +21,8 @@ class App extends Component {
   return (
     <>
     <AddEmp newemp={this.Addempl}/>
+
+    <ListEmp EmpData={this.state.employee}/>
     </>
     
   );
