@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+//import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form,Button} from 'react-bootstrap'
 
-class AddEmp extends Component {
+class EditEmp extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            firstname: "",
-            lastname: "",
-            email: "",
-            phonenumber: "",
-            dateofbirth: "",
-            address: "",
-            jobrole: "",
-            salary: "",
+            id:props.EmpData.id,
+            firstname: props.EmpData.firstname,
+            lastname: props.EmpData.lastname,
+            email: props.EmpData.email,
+            phonenumber: props.EmpData.phonenumber,
+            dateofbirth: props.EmpData.dateofbirth,
+            address: props.EmpData.address,
+            jobrole: props.EmpData.jobrole,
+            salary:props.EmpData.salary,
         }
     }
     handlechange=(e)=>{
@@ -24,7 +25,7 @@ class AddEmp extends Component {
     }
     handlesubmit=(e)=>{
         e.preventDefault()
-        this.props.newemp(this.state)
+        this.props.updatem(this.state.id, this.state)
         this.setState({
             firstname: "",
             lastname: "",
@@ -35,13 +36,13 @@ class AddEmp extends Component {
             jobrole: "",
             salary: "", 
         })
+        this.props.closemodal()
     }
     render() {
         return (
-            <div style={{marginLeft:'15rem',marginTop:'2rem',marginRight:'15rem'}}>
-                <Form  onSubmit={this.handlesubmit}>
-                    <h1 style={{textAlign:'center'}}>Add Employee</h1>
-                <Form.Group size="sm" className="mb-3" controlId="formBasicEmail">
+            <div >
+                <Form onSubmit={this.handlesubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>First Name: </Form.Label>
                         <Form.Control type="text" placeholder="Enter First Name" name="firstname"  value={this.state.firstname} onChange={this.handlechange}/>
                     </Form.Group>
@@ -68,7 +69,7 @@ class AddEmp extends Component {
 
                     <Form.Group className="mb-3" controlId="formBasicPassword">
                         <Form.Label>Job Role: </Form.Label>
-                        <Form.Control type="text" placeholder="Enter job role" name="jobrole"   value={this.state.jobrole} onChange={this.handlechange}/>
+                        <Form.Control type="text" placeholder="Password" name="jobrole"   value={this.state.jobrole} onChange={this.handlechange}/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <Form.Label>Salary: </Form.Label>
@@ -78,11 +79,10 @@ class AddEmp extends Component {
                     <Button variant="primary" type="submit">
                         Submit
                     </Button>
-                   
                 </Form>
             </div>
         );
     }
 }
 
-export default AddEmp;
+export default EditEmp;

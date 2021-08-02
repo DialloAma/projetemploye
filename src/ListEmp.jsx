@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Table } from 'react-bootstrap'
+import { Table,Modal } from 'react-bootstrap'
 import {FcEditImage, FcDeleteRow} from 'react-icons/fc'
+import EditEmp from './EditEmp';
+
 
 const ListEmp = (props) => {
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
     return (
         <div>
+            <h1 style={{textAlign:'center'}}>List of Employees</h1>
             <Table striped bordered hover size="sm">
                 <thead>
                     <tr>
@@ -27,7 +33,7 @@ const ListEmp = (props) => {
                                 <tr key={emp.id}>
                                     <Modal show={show} onHide={handleClose} animation={false}>
                                     <Modal.Body>
-                                        <EditUser userdata={user} updateuse={update} closemodal={handleClose} />
+                                        <EditEmp EmpData={emp} updatem={props.updatemp} closemodal={handleClose} />
                                     </Modal.Body>
 
                                 </Modal>
@@ -39,7 +45,9 @@ const ListEmp = (props) => {
                                     <td>{emp.address}</td>
                                     <td>{emp.jobrole}</td>
                                     <td>{emp.salary}</td>
-                                    <td><FcEditImage/>  <FcDeleteRow  style={{color:'red', cursor:'pointer'}} onClick={()=>props.deletemp(emp.id)} /></td>
+                                    <td><FcEditImage style={{cursor:'pointer'}} onClick={handleShow}/> 
+                                     <FcDeleteRow  style={{color:'red', cursor:'pointer'}}
+                                      onClick={()=>props.deletemp(emp.id)} /></td>
                                 </tr>
                             )
                         })
